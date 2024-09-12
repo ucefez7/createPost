@@ -38,7 +38,6 @@
     .logo {
       width: 120px;
       margin-bottom: 20px;
-      /* padding-top: 40px; */
     }
 
     form {
@@ -87,25 +86,15 @@
       cursor: pointer;
       font-size: 16px;
       grid-column: span 2;
-      transition: background-color 0.3s ease;
+      transition: background-color 0.3s ease, transform 0.2s;
     }
 
     .form-group button:hover {
       opacity: 0.9;
     }
 
-    #responseMessage {
-      margin-top: 20px;
-      font-size: 1em;
-      text-align: center;
-    }
-
-    .error {
-      color: #e94f4f;
-    }
-
-    .success {
-      color: #4caf50;
+    .form-group button:active {
+      transform: scale(0.98);
     }
 
     @media (max-width: 768px) {
@@ -122,6 +111,7 @@
       }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   <div class="container">
@@ -129,27 +119,22 @@
     <h1>Create Post</h1>
     <form id="postForm" enctype="multipart/form-data">
       <div class="form-group">
-        
         <input type="text" id="title" name="title" placeholder="Enter the title" required>
       </div>
 
       <div class="form-group">
-       
         <textarea id="description" name="description" placeholder="Enter the description" required></textarea>
       </div>
 
       <div class="form-group">
-        
         <input type="text" id="location" name="location" placeholder="Enter the location">
       </div>
 
       <div class="form-group">
-       
         <input type="text" id="category" name="category" placeholder="Enter the category" required>
       </div>
 
       <div class="form-group">
-        
         <input type="text" id="subCategory" name="subCategory" placeholder="Enter the subcategory" required>
       </div>
 
@@ -177,15 +162,12 @@
         <button type="button" onclick="submitForm()">Submit</button>
       </div>
     </form>
-
-    <div id="responseMessage"></div>
   </div>
 
   <script>
     function submitForm() {
       const form = document.getElementById('postForm');
       const formData = new FormData(form);
-      const responseMessage = document.getElementById('responseMessage');
       const isBlogChecked = document.getElementById('isBlog').checked;
 
       // Set isBlog to 'true' if checked, otherwise 'false'
@@ -200,12 +182,22 @@
       })
       .then(response => response.json())
       .then(data => {
-        // Display success message
-        responseMessage.innerHTML = `<p class="success">Success: ${JSON.stringify(data)}</p>`;
+        // Display success alert
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: JSON.stringify(data),
+          confirmButtonText: 'Okay'
+        });
       })
       .catch((error) => {
-        // Display error message
-        responseMessage.innerHTML = `<p class="error">Error: ${error.message}</p>`;
+        // Display error alert
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.message,
+          confirmButtonText: 'Try Again'
+        });
       });
     }
   </script>
