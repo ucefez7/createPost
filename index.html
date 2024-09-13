@@ -29,10 +29,10 @@
 
     h1 {
       font-size: 24px;
-      margin-bottom: 1px;
+      margin-bottom: 30px;
       color: #333;
       font-weight: 600;
-      padding-top: 40px;
+      padding-top: 10px;
     }
 
     .logo {
@@ -110,6 +110,10 @@
         grid-column: auto;
       }
     }
+    #btn1{
+      margin-left: 50%;
+      min-width: 100%;
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -143,22 +147,22 @@
         <input type="checkbox" id="isBlog" name="isBlog">
       </div>
 
-      <div class="form-group">
+      <!-- <div class="form-group">
         <label for="media">Media (images/videos):</label>
         <input type="file" id="media" name="media" multiple>
-      </div>
+      </div> -->
 
       <div class="form-group">
         <label for="coverPhoto">Cover Photo:</label>
         <input type="file" id="coverPhoto" name="coverPhoto">
       </div>
 
-<!--       <div class="form-group">
+      <div class="form-group">
         <label for="video">Video:</label>
         <input type="file" id="video" name="video">
-      </div> -->
+      </div>
 
-      <div class="form-group">
+      <div class="form-group" id="btn1">
         <button type="button" onclick="submitForm()">Submit</button>
       </div>
     </form>
